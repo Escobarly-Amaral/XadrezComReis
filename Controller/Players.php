@@ -10,7 +10,7 @@ class Players extends connectionDB {
     protected $password_login;
 
     function __construct($name = '', $email, $password){
-        parent::__construct(); // Ensure the database connection is established
+        parent::__construct();
         $this->name_Cad = $name;
         $this->email_Cad = $email;
         $this->password_Cad = $password;
@@ -26,13 +26,13 @@ class Players extends connectionDB {
 
         $query = "INSERT INTO players (nome, email, senha) VALUES ('$name_Cad', '$email_Cad', '$password_Cad')";
         if (mysqli_query($this->linkstart, $query)) {
-            echo "Registration successful!";
+            echo "Registrado Com Sucesso!";
         } else {
             echo "Error: " . $query . "<br>" . mysqli_error($this->linkstart);
         }
     echo '<script>
             setTimeout(() => {
-                window.location.href = "../index.php";
+                window.location.href = "../jogar.php";
             }, 1000);
         </script>';
     exit();
@@ -47,15 +47,12 @@ class Players extends connectionDB {
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             if ($this->password_login == $row['senha']) {
-                // Login successful
-                echo "Login successful!";
+                echo "Logado Com Sucesso!";
             } else {
-                // Invalid password
-                echo "Invalid password!";
+                echo "Senha Errada!";
             }
         } else {
-            // Invalid email
-            echo "Invalid email!";
+            echo "Email Errado!";
         }
     echo '<script>
             setTimeout(() => {
